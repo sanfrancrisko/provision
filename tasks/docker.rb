@@ -21,7 +21,6 @@ def install_ssh_components(platform, container)
     # This "fix" is from https://www.srv24x7.com/criticalyum-main-error-rpmdb-open-failed/
     run_local_command("docker exec #{container} bash -exc 'rm -f /var/lib/rpm/__db*; "\
       'db_verify /var/lib/rpm/Packages; '\
-      'rpm --rebuilddb; '\
       'yum clean all; '\
       "yum install -y sudo openssh-server openssh-clients'")
     ssh_folder = run_local_command("docker exec #{container} ls /etc/ssh/")
